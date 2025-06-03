@@ -1,0 +1,13 @@
+.subcategory{
+    background-color:#f8f9fa ;
+    padding:20px
+}
+
+
+
+.addButton{
+    margin: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: end;
+}
