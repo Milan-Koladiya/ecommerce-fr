@@ -2,6 +2,7 @@ import axios from "axios";
 import localStorage from "../utils/localStorage";
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+console.log(API_BASE_URL)
 
 const createAxiosInstance = () => {
   const instance = axios.create({
@@ -10,7 +11,7 @@ const createAxiosInstance = () => {
 
   instance.interceptors.request.use(
     (config) => {
-      const tokens = localStorage.getItem("access_token") ?? {};
+      const tokens = localStorage.getItem("token") ?? {};
       config.headers.authorization = `Bearer ${tokens}`;
       return config;
     },

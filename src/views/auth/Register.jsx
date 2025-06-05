@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuthentication';
+import useAuthentication from '../../hooks/useAuthentication';
 import Alert from '../../components/common/alert';
 
 const Register = () => {
-    const { loading, apiName, alertType, message, closeAlert, Register } = useAuth();
+    const { loading, apiName, alertType, message, closeAlert, Register } = useAuthentication();
+    console.log(message)
     const navigate = useNavigate();
 
     const [data, setData] = useState({

@@ -5,8 +5,7 @@ import { useDispatch } from 'react-redux'
 const ResetPassword = () => {
 
     const location = useLocation();
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
+   
     const token = new URLSearchParams(location.search).get('token');
 
     const [password, setPassword] = useState('');

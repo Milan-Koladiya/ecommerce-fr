@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
         });
       } catch (error) {
         console.log("error", error);
-        return Toast.error("Failed to fetch User");
       }
     };
 
@@ -41,4 +40,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext); 

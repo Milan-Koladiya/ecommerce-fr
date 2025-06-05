@@ -1,10 +1,15 @@
-import React,{useState} from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-const login = () => {
+import useAuthentication from '../../hooks/useAuthentication'
+import { useAuth } from '../../context/AuthContex'
+import Alert from '../../components/common/alert'
+const Login = () => {
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const { setAuthUser, authUser } = useAuth();
+    const { loading, login, apiName, alertType, message, closeAlert } = useAuthentication();
+
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -14,6 +19,20 @@ const login = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        const res = await login(data)
+
+        if (res?.type !== 'auth/login/rejected') {
+            const user = res?.payload?.user;
+            setAuthUser(user);
+            console.log("cwebcujewbcevev")
+            navigate('/dashboard');
+        }
+        
+    }
+
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="mt-5 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -21,13 +40,21 @@ const login = () => {
                     <img className="w-10 h-8 mr-2" src="https://www.creativefabrica.com/wp-content/uploads/2022/06/17/Ecommerce-Logo-Design-Graphics-32523051-1-1-580x386.jpg" alt="logo" />
                     <h1>Ecommerce</h1>
                 </div>
+
                 <div className="mb-20 w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-
+                        {(apiName === '/auth/login') && alertType && message && (
+                            <Alert
+                                type={alertType}
+                                message={message}
+                                showButton={true}
+                                closeAlert={closeAlert}
+                            />
+                        )}
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Login
                         </h1>
-                        <form className="space-y-4 md:space-y-6">
+                        <form onSubmit={onSubmit} method="post" className="space-y-4 md:space-y-6">
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                 <input type="email" value={data.email} onChange={handleOnChange} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
@@ -54,4 +81,4 @@ const login = () => {
     )
 }
 
-export default login
+export default Login

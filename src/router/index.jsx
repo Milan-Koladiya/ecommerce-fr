@@ -1,12 +1,18 @@
 import { createBrowserRouter,Navigate } from 'react-router-dom'
 
 import PublicRoute from '../layout/PublicLayout'
+import PrivateRoute from '../layout/PrivateLayout'
 
 import Login from '../pages/auth/login'
 import Register from '../pages/auth/register'
 import ForgetPassword from '../pages/auth/forget-password'
 import ResetPassword from '../pages/auth/reset-password'
+import VerifyEmail from '../pages/auth/verify-email'
 
+import Dashboard from '../views/Dashboard'
+import ViewCategory from '../views/category/ViewCategory'
+import ViewSubCategory from '../views/subcategory/ViewSubCategory'
+import ViewProduct from '../views/product/ViewProduct'
 const router = createBrowserRouter([
     {
         element: <PublicRoute />,
@@ -34,8 +40,30 @@ const router = createBrowserRouter([
             },
             {
                 path: "/verify",
-                element: ""
+                element: <VerifyEmail/>
             }
+        ]
+    },
+    {
+        element:<PrivateRoute/>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<Dashboard/>
+            },
+            {
+                path:'/category/view',
+                element:<ViewCategory/>
+            },
+            {
+                path:'/subcategory/view',
+                element:<ViewSubCategory/>
+            },
+            {
+                path:'/product/view',
+                element:<ViewProduct/>
+            },
+            
         ]
     }
 ])

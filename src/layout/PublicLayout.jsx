@@ -11,7 +11,7 @@ const PublicRoute = () => {
     }
 
     if (authUser) {
-        return <Navigate to="/" />
+        return <Navigate to="/dashboard" />
     }
 
     return <Outlet />
