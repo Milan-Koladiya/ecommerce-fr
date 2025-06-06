@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
-import { fetchProductAction } from '../store/actions/product.action'
+import { fetchProductAction, addProductAction, deleteProductAction } from '../store/actions/product.action'
 
 const useProduct = () => {
     const {
@@ -19,6 +19,15 @@ const useProduct = () => {
         return await dispatch(fetchProductAction())
 
     }
+
+    const addProduct = async (body) => {
+        return await dispatch(addProductAction(body));
+    };
+
+    const deleteProduct = async (id) => {
+        return await dispatch(deleteProductAction(id))
+    }
+
     const closeAlert = () => {
         dispatch(clearMessage());
     };
@@ -31,7 +40,9 @@ const useProduct = () => {
         alertType,
         emailStatus,
         closeAlert,
-        viewProduct
+        viewProduct,
+        addProduct,
+        deleteProduct
     }
 
 }

@@ -3,10 +3,13 @@ import { Button, Table } from 'react-bootstrap'
 import DynamicModal from '../../components/dynamivModal'
 import AddProduct from '../../views/product/AddProducts'
 import useProduct from '../../hooks/useProduct'
+import { FaEdit } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+
 
 const ViewProduct = () => {
     const [showModal, setShowModal] = useState(false);
-    const { viewProduct, loading, message, error, alertType } = useProduct();
+    const { viewProduct,deleteProduct, loading, message, error, alertType } = useProduct();
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
@@ -19,6 +22,15 @@ const ViewProduct = () => {
             setProduct(res.payload);
         }
     };
+
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      const res = await deleteProduct(id);
+        handleFetchProduct();
+      
+    }
+  };
 
 
     return (
@@ -40,6 +52,8 @@ const ViewProduct = () => {
                                 <th>SubCategory</th>
                                 <th>Category</th>
                                 <th>Image</th>
+                               <th colSpan={2}>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -51,24 +65,23 @@ const ViewProduct = () => {
                                         <td>{pro.description}</td>
                                         <td>{pro.price}</td>
                                         <td>{pro.quantity}</td>
-                                        <td>{pro.subcategory.category.name}</td>
-                                        <td>{pro.subcategory.name}</td>
-                                        <td>  {
-
-                                            pro.image_url ? (<img
-                                                src={pro.image_url}
-                                                alt={pro.name}
-                                                style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                                        <td>{pro.subcategory?.category.name || '-'}</td>
+                                        <td>{pro.subcategory?.name || '-'}</td>
+                                        <td>  {  pro.image_url ? (
+                                            <img src={pro.image_url} alt={pro.name} style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                                             // onError={(e) => { e.target.src = '/default-image.png' }}
                                             />) : (
                                                 'No image'
                                             )}
                                         </td>
+                                          <td>{<MdDelete onClick={() => handleDelete(pro.id)} />}</td>
+                                          <td>{<FaEdit />}</td>
+                                        
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5">No categories found.</td>
+                                    <td colSpan="8">No categories found.</td>
                                 </tr>
                             )}
                         </tbody>
@@ -78,7 +91,7 @@ const ViewProduct = () => {
             <DynamicModal show={showModal} onHide={() => setShowModal(false)} title='Add Product'>
                 <AddProduct onSuccess={() => {
                     setShowModal(false);
-                    fetchProduct();
+                    handleFetchProduct();
                 }
                 } />
             </DynamicModal>

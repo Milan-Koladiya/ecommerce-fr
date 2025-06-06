@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Navigate,useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import useAuthentication from '../../hooks/useAuthentication'
 import { useAuth } from '../../context/AuthContex'
 import Alert from '../../components/common/alert'
+import Dashboard from '../Dashboard'
 const Login = () => {
 
     const navigate = useNavigate();
@@ -23,14 +24,13 @@ const Login = () => {
         e.preventDefault();
 
         const res = await login(data)
-
-        if (res?.type !== 'auth/login/rejected') {
-            const user = res?.payload?.user;
+    
+        if (res?.type === 'auth/login/fulfilled') {
+            const user = res?.payload?.data;
             setAuthUser(user);
-            console.log("cwebcujewbcevev")
-            navigate('/dashboard');
+            navigate('/dashboard')
         }
-        
+
     }
 
     return (

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
-import { fetchCategoryAction } from '../store/actions/category.action'
+import { clearMessage, errorMessage } from '../store/reducers/category.reducers'
+import { fetchCategoryAction, addCategoryAction,deleteCategoryAction} from '../store/actions/category.action'
 
 const useCategory = () => {
     const {
@@ -10,7 +10,7 @@ const useCategory = () => {
         apiName,
         alertType,
         emailStatus,
-    } = useSelector((state) => state.auth);
+    } = useSelector((state) => state.category);
 
 
     const dispatch = useDispatch();
@@ -19,6 +19,15 @@ const useCategory = () => {
         return await dispatch(fetchCategoryAction())
 
     }
+
+    const addCategory = async (body) => {
+        return await dispatch(addCategoryAction({ name: body }));
+    };
+
+    const deleteCategory=async(id)=>{
+        return await dispatch(deleteCategoryAction(id))
+    }
+
     const closeAlert = () => {
         dispatch(clearMessage());
     };
@@ -31,7 +40,9 @@ const useCategory = () => {
         alertType,
         emailStatus,
         closeAlert,
-        viewCategory
+        viewCategory,
+        addCategory,
+        deleteCategory
     }
 
 }

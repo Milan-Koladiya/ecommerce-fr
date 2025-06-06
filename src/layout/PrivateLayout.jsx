@@ -13,6 +13,7 @@ const PrivateRoute = () => {
     }
 
     if (!authUser) {
+        console.log("not authorize")
         return <Navigate to="/login" />;
     }
 

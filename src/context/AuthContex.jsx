@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         setAuthUser({
           ...user?.data?.data,
         });
+        console.log("==============user data",user)
       } catch (error) {
         console.log("error", error);
       }
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     if (authUser) {
       fetchUser();
+      console.log("authorize")
     }
     setLoading(false);
   }, []);
@@ -32,6 +34,7 @@ export const AuthProvider = ({ children }) => {
   if (loading) {
     return <Loader />;
   }
+
 
   return (
     <AuthContext.Provider value={{ authUser, loading, setAuthUser }}>

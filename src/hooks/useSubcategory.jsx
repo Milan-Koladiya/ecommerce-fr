@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
-import { fetchSubcategoryAction } from '../store/actions/subcategory.action'
+import { fetchSubcategoryAction,addSubcategoryAction,deleteSubcategoryAction} from '../store/actions/subcategory.action'
 
 const useSubcategory = () => {
     const {
@@ -19,6 +19,14 @@ const useSubcategory = () => {
         return await dispatch(fetchSubcategoryAction())
 
     }
+        const deleteSubcategory=async(id)=>{
+            return await dispatch(deleteSubcategoryAction(id))
+        }
+    
+    const addSubcategory = async (body) => {
+        return await dispatch(addSubcategoryAction(body));
+    };
+
     const closeAlert = () => {
         dispatch(clearMessage());
     };
@@ -31,7 +39,9 @@ const useSubcategory = () => {
         alertType,
         emailStatus,
         closeAlert,
-        viewSubcategory
+        viewSubcategory,
+        addSubcategory,
+        deleteSubcategory
     }
 
 }

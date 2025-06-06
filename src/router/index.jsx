@@ -41,7 +41,8 @@ const router = createBrowserRouter([
             {
                 path: "/verify",
                 element: <VerifyEmail/>
-            }
+            },
+            
         ]
     },
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
             },
             {
                 path:'/product/view',
+                element:<ViewProduct/>
+            },
+            {
+                path:'/categories/:id',
                 element:<ViewProduct/>
             },
             

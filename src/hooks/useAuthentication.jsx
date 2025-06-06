@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     registerAction,
     verifyEmailAction,
-    loginAction
+    loginAction,
+    logoutAction,
+    forgetPasswordAction,
+    resetPasswordAction
 } from '../store/actions/auth.action'
 import { useLocation } from 'react-router-dom'
 import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
@@ -39,6 +42,12 @@ const useAuth = () => {
     const resetPassword = async ({ token, newPassword }) => {
         return await dispatch(resetPasswordAction({ token, newPassword }));
     };
+
+
+    const logout = async () => {
+        await dispatch(logoutAction())
+    }
+
     const closeAlert = () => {
         dispatch(clearMessage());
     };
@@ -55,8 +64,8 @@ const useAuth = () => {
         closeAlert,
         login,
         forgetPassword,
-        resetPassword
-
+        resetPassword,
+        logout
     }
 }
 

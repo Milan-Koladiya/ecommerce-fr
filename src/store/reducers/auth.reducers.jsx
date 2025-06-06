@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerAction, verifyEmailAction, loginAction, forgetPasswordAction, resetPasswordAction } from "../actions/auth.action";
+import { registerAction, verifyEmailAction, loginAction, forgetPasswordAction, resetPasswordAction, logoutAction } from "../actions/auth.action";
 
 const initialState = {
   loading: "",
@@ -95,38 +95,56 @@ const authSlice = createSlice({
         }
       })
 
+    //Forget Password
     builder.addCase(forgetPasswordAction.pending, (state) => {
       state.loading = true;
-      state.apiName = 'forgetPassword';
+      state.apiName = '/auth/forgetPassword';
     });
     builder.addCase(forgetPasswordAction.fulfilled, (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.alertType = 'success';
       state.error = null;
     });
     builder.addCase(forgetPasswordAction.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.message = action.payload;
+      state.error = null;
       state.alertType = 'danger';
     });
 
+    //Reset Password
     builder.addCase(resetPasswordAction.pending, (state) => {
       state.loading = true;
-      state.apiName = 'resetPassword';
+      state.apiName = '/auth/resetPassword';
+      state.emailStatus="success";
     });
     builder.addCase(resetPasswordAction.fulfilled, (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message =action.payload.message;
       state.alertType = 'success';
       state.error = null;
     });
     builder.addCase(resetPasswordAction.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.message = action.payload;
       state.alertType = 'danger';
     });
 
+
+    //logout Reducers
+    builder.addCase(logoutAction.pending, (state) => {
+      state.loading = "logout";
+    });
+    builder.addCase(logoutAction.fulfilled, (state) => {
+      state.loading = "";
+      state.message = "Logged out successfully";
+      state.apiName = "logout";
+    });
+    builder.addCase(logoutAction.rejected, (state) => {
+      state.loading = "";
+      state.apiName = "logout";
+    });
 
   },
 

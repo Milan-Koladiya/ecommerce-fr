@@ -47,7 +47,7 @@ export const loginAction = createAsyncThunk(
       }
       console.log(response)
     
-      localStorage.setItem('user',response.data)
+      localStorage.setItem('user',response.data.data)
       localStorage.setItem('token',response.data.data.token)
       localStorage.setItem('refresh_token',response.data.data.token)
       return thinkAPI.fulfillWithValue(response?.data);
@@ -95,3 +95,18 @@ export const resetPasswordAction = createAsyncThunk(
     }
   }
 );
+
+
+export const logoutAction = createAsyncThunk("auth/logout", async (_, thinkAPI) => {
+    try {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("refresh_token");
+        return true;
+    } catch (error) {
+        return thinkAPI.rejectWithValue({
+            message: error?.data?.message || "Something is wrong here",
+        });
+
+    }
+});

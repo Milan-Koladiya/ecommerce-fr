@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
+import useAuthentication from '../../hooks/useAuthentication'
+import Alert from '../../components/common/alert'
 
 const ForgetPassword = () => {
-
+    const { loading, apiName, forgetPassword, alertType, message, closeAlert } = useAuthentication();
      const [email, setEmail] = useState('');
-    const dispatch = useDispatch()
-   
 
+    const handleSubmit=async(e)=>{
+        e.preventDefault()
+            const res=await forgetPassword(email)
+    }
 
   return (
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -17,10 +21,19 @@ const ForgetPassword = () => {
                 </div>
                 <div className="mb-20 w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+
+                        {(apiName === '/auth/forgetPassword') && alertType && message && (
+                            <Alert
+                                type={alertType}
+                                message={message}
+                                showButton={true}
+                                closeAlert={closeAlert}
+                            />
+                        )}
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Forgot Password
                         </h1>
-                        <form  className="space-y-4 md:space-y-6">
+                        <form onSubmit={handleSubmit}  className="space-y-4 md:space-y-6">
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                 <input

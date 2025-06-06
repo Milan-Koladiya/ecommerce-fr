@@ -24,3 +24,45 @@ export const fetchSubcategoryAction = createAsyncThunk(
     }
   }
 );
+
+
+export const addSubcategoryAction = createAsyncThunk(
+  "subcategory/",
+  async (arg, thunkAPI) => {
+    try {
+        const token=localStorage.getItem('token')
+      const response = await axios.post("http://localhost:5500/subcategories/",arg,{
+        headers:{
+            Authorization:`Bearer ${token}`,
+            'Content-Type':'application/json'
+        }
+      });
+      return thunkAPI.fulfillWithValue(response.data.data); 
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch subcategories"
+      );
+    }
+  }
+);
+
+
+
+export const deleteSubcategoryAction = createAsyncThunk(
+    "subcategory/delete",
+    async (id, thunkAPI) => {
+        try {
+            const token = localStorage.getItem('token')
+
+            const res = await axios.delete(`http://localhost:5500/subcategories/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            return thunkAPI.fulfillWithValue(res.data);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Delete failed");
+        }
+    }
+);

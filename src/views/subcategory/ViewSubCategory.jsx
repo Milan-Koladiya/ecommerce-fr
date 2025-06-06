@@ -8,7 +8,7 @@ import { MdDelete } from 'react-icons/md';
 
 const ViewSubCategory = () => {
    const [showModal, setShowModal] = useState(false);
-  const { viewSubcategory, loading, message, error, alertType } = useSubcategory();
+  const { viewSubcategory, loading, message, error, alertType,closeAlert,deleteSubcategory } = useSubcategory();
   const [subcategory, setSubcategory] = useState([]);
 
   useEffect(() => {
@@ -22,6 +22,16 @@ const ViewSubCategory = () => {
     }
   };
 
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this subcategory?")) {
+      const res = await deleteSubcategory(id);
+        handleFetchSubCategories();
+      
+    }
+  };
+
+
     return (
 
 
@@ -29,7 +39,7 @@ const ViewSubCategory = () => {
             <div className="main-content">
                 <h1>Subcategory</h1>
                 <div className=' d-flex justify-content-end mb-3'>
-                    <Button onClick={() => setShowModal(true)} variant='primary'>+ Add SubCategory</Button>
+                    <Button onClick={() =>{ closeAlert(); setShowModal(true)}} variant='primary'>+ Add SubCategory</Button>
                 </div>
                 <div className="table-container">
                     <Table striped bordered hover responsive>
@@ -47,25 +57,25 @@ const ViewSubCategory = () => {
                                     <tr key={index}>
                                         <td>{index + 1}</td>
                                         <td>{sub.name}</td>
-                                        <td>{sub.category.name}</td>
-                                        <td>{<MdDelete />}</td>
+                                        <td>{sub.category?.name || '—'}</td>
+                                        <td>{<MdDelete onClick={() => handleDelete(sub.id)} />}</td>
                                         <td>{<FaEdit />}</td>
 
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="2">No categories found.</td>
+                                    <td colSpan="4">No categories found.</td>
                                 </tr>
                             )}
                         </tbody>
                     </Table>
                 </div>
             </div>
-            <DynamicModal show={showModal} onHide={() => setShowModal(false)} title={'Add Subcategory'}>
+            <DynamicModal show={showModal} onHide={() =>{closeAlert(), setShowModal(false)}} title={'Add Subcategory'}>
                 <AddSubcategory onSuccess={() => {
                     setShowModal(false)
-                    fetchSubcategory();
+                        handleFetchSubCategories();
                 }} />
             </DynamicModal>
         </div>
