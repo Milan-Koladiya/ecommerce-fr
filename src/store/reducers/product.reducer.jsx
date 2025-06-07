@@ -1,6 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProductAction, addProductAction, deleteProductAction } from "../actions/product.action";
+import { fetchProductAction, addProductAction, editProductAction, deleteProductAction } from "../actions/product.action";
 
 const productSlice = createSlice({
     name: "product",
@@ -65,6 +65,23 @@ const productSlice = createSlice({
             state.success = action.payload.message;
         })
         builder.addCase(deleteProductAction.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+        //edit product reducer
+
+        builder.addCase(editProductAction.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(editProductAction.fulfilled, (state, action) => {
+            state.alertType = 'success'
+            state.loading = false;
+            state.message = action.payload.message;
+        })
+        builder.addCase(editProductAction.rejected, (state, action) => {
+            state.alertType = 'danger'
             state.loading = false;
             state.error = action.payload;
         });

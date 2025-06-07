@@ -51,7 +51,7 @@ export const addCategoryAction = createAsyncThunk(
 
 export const deleteCategoryAction = createAsyncThunk(
     "category/delete",
-    async (id, thunkAPI) => {
+    async (id, thinkAPI) => {
         try {
             const token = localStorage.getItem('token')
 
@@ -61,9 +61,31 @@ export const deleteCategoryAction = createAsyncThunk(
                     'Content-Type': 'application/json'
                 }
             });
-            return thunkAPI.fulfillWithValue(res.data);
+            return thinkAPI.fulfillWithValue(res.data);
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response?.data?.message || "Delete failed");
+            return thinkAPI.rejectWithValue(error.response?.data?.message || "Delete failed");
         }
     }
 );
+
+export const editCategoryAction = createAsyncThunk(
+    "category/edit",
+    async ({id,body},thinkAPI) => {
+        try {
+            
+            const token = localStorage.getItem('token')
+            const res = await axios.put(`http://localhost:5500/categories/${id}`, body, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            return thinkAPI.fulfillWithValue(res.data)
+        }
+        catch (error) {
+            console.log(error)
+            return thinkAPI.rejectWithValue(error.response?.data?.message || "Update failed");
+
+        }
+    }
+)

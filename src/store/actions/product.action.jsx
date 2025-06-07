@@ -64,3 +64,28 @@ export const deleteProductAction = createAsyncThunk(
         }
     }
 );
+
+
+
+
+export const editProductAction = createAsyncThunk(
+    "product/edit",
+    async ({id,body},thinkAPI) => {
+        try {
+            
+            const token = localStorage.getItem('token')
+            const res = await axios.put(`http://localhost:5500/product/${id}`, body, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            return thinkAPI.fulfillWithValue(res.data)
+        }
+        catch (error) {
+            console.log(error)
+            return thinkAPI.rejectWithValue(error.response?.data?.message || "Update failed");
+
+        }
+    }
+)

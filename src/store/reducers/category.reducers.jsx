@@ -1,6 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategoryAction, addCategoryAction, deleteCategoryAction } from "../actions/category.action";
+import { fetchCategoryAction, addCategoryAction, deleteCategoryAction,editCategoryAction } from "../actions/category.action";
 
 const categorySlice = createSlice({
     name: "category",
@@ -67,6 +67,23 @@ const categorySlice = createSlice({
             state.success = action.payload.message;
         })
         builder.addCase(deleteCategoryAction.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+        //edit category
+
+        builder.addCase(editCategoryAction.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(editCategoryAction.fulfilled, (state, action) => {
+            state.alertType='success'
+            state.loading = false;
+            state.message = action.payload.message;
+        })
+        builder.addCase(editCategoryAction.rejected, (state, action) => {
+            state.alertType='danger'
             state.loading = false;
             state.error = action.payload;
         });

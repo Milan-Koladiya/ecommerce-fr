@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage, errorMessage } from '../store/reducers/category.reducers'
-import { fetchCategoryAction, addCategoryAction,deleteCategoryAction} from '../store/actions/category.action'
+import { fetchCategoryAction, addCategoryAction,deleteCategoryAction,editCategoryAction} from '../store/actions/category.action'
 
 const useCategory = () => {
     const {
@@ -28,6 +28,10 @@ const useCategory = () => {
         return await dispatch(deleteCategoryAction(id))
     }
 
+    const EditCategory=async(id,body)=>{
+        return await dispatch(editCategoryAction({id,body:body}))
+    }
+
     const closeAlert = () => {
         dispatch(clearMessage());
     };
@@ -42,7 +46,8 @@ const useCategory = () => {
         closeAlert,
         viewCategory,
         addCategory,
-        deleteCategory
+        deleteCategory,
+        EditCategory
     }
 
 }

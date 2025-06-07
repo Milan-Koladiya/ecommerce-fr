@@ -2,7 +2,7 @@
 
 
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSubcategoryAction, addSubcategoryAction,deleteSubcategoryAction } from "../actions/subcategory.action";
+import { fetchSubcategoryAction, addSubcategoryAction,editSubcategoryAction, deleteSubcategoryAction } from "../actions/subcategory.action";
 
 const subcategorySlice = createSlice({
     name: "subcategory",
@@ -58,20 +58,37 @@ const subcategorySlice = createSlice({
         //delete subcategory action
 
 
-                builder.addCase(deleteSubcategoryAction.pending, (state) => {
-                    state.loading = true;
-                    state.error = null;
-                    state.success = null;
-                })
-                builder.addCase(deleteSubcategoryAction.fulfilled, (state, action) => {
-                    state.loading = false;
-                    state.success = action.payload.message;
-                })
-                builder.addCase(deleteSubcategoryAction.rejected, (state, action) => {
-                    state.loading = false;
-                    state.error = action.payload;
-                });
-        
+        builder.addCase(deleteSubcategoryAction.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+            state.success = null;
+        })
+        builder.addCase(deleteSubcategoryAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = action.payload.message;
+        })
+        builder.addCase(deleteSubcategoryAction.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+
+        //edit subcategory
+        builder.addCase(editSubcategoryAction.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(editSubcategoryAction.fulfilled, (state, action) => {
+            state.alertType = 'success'
+            state.loading = false;
+            state.message = action.payload.message;
+        })
+        builder.addCase(editSubcategoryAction.rejected, (state, action) => {
+            state.alertType = 'danger'
+            state.loading = false;
+            state.error = action.payload;
+        });
+
     },
 });
 

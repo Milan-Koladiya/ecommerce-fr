@@ -11,6 +11,7 @@ import VerifyEmail from '../pages/auth/verify-email'
 
 import Dashboard from '../views/Dashboard'
 import ViewCategory from '../views/category/ViewCategory'
+import EditCategory from '../views/category/EditCategory'
 import ViewSubCategory from '../views/subcategory/ViewSubCategory'
 import ViewProduct from '../views/product/ViewProduct'
 const router = createBrowserRouter([
@@ -48,14 +49,21 @@ const router = createBrowserRouter([
     {
         element:<PrivateRoute/>,
         children:[
+
             {
                 path:'/dashboard',
                 element:<Dashboard/>
             },
+            //category route
             {
                 path:'/category/view',
                 element:<ViewCategory/>
             },
+            {
+                path:'/category/edit',
+                element:<EditCategory/>
+            },
+            //subcategory route
             {
                 path:'/subcategory/view',
                 element:<ViewSubCategory/>
@@ -64,10 +72,14 @@ const router = createBrowserRouter([
                 path:'/product/view',
                 element:<ViewProduct/>
             },
+            
+            //orders route
+
             {
-                path:'/categories/:id',
-                element:<ViewProduct/>
+                path:'/orders/view',
+                element:<ViewOrder/>
             },
+            
             
         ]
     }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
-import { fetchSubcategoryAction,addSubcategoryAction,deleteSubcategoryAction} from '../store/actions/subcategory.action'
+import { fetchSubcategoryAction, addSubcategoryAction, deleteSubcategoryAction,editSubcategoryAction } from '../store/actions/subcategory.action'
 
 const useSubcategory = () => {
     const {
@@ -19,10 +19,10 @@ const useSubcategory = () => {
         return await dispatch(fetchSubcategoryAction())
 
     }
-        const deleteSubcategory=async(id)=>{
-            return await dispatch(deleteSubcategoryAction(id))
-        }
-    
+    const deleteSubcategory = async (id) => {
+        return await dispatch(deleteSubcategoryAction(id))
+    }
+
     const addSubcategory = async (body) => {
         return await dispatch(addSubcategoryAction(body));
     };
@@ -30,6 +30,10 @@ const useSubcategory = () => {
     const closeAlert = () => {
         dispatch(clearMessage());
     };
+
+    const editSubcategory = async (id,body) => {
+        return await dispatch(editSubcategoryAction({id,body:body}))
+    }
 
     return {
         loading,
@@ -41,7 +45,8 @@ const useSubcategory = () => {
         closeAlert,
         viewSubcategory,
         addSubcategory,
-        deleteSubcategory
+        deleteSubcategory,
+        editSubcategory
     }
 
 }
