@@ -14,6 +14,8 @@ import ViewCategory from '../views/category/ViewCategory'
 import EditCategory from '../views/category/EditCategory'
 import ViewSubCategory from '../views/subcategory/ViewSubCategory'
 import ViewProduct from '../views/product/ViewProduct'
+import ViewOrder from '../views/order/ViewOrder'
+
 const router = createBrowserRouter([
     {
         element: <PublicRoute />,

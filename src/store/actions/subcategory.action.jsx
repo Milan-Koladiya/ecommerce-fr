@@ -37,7 +37,7 @@ export const addSubcategoryAction = createAsyncThunk(
             'Content-Type':'application/json'
         }
       });
-      return thunkAPI.fulfillWithValue(response.data.data); 
+      return thunkAPI.fulfillWithValue(response.data); 
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to fetch subcategories"

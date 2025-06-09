@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
+import { clearMessage, errorMessage } from '../store/reducers/product.reducer'
 import { fetchProductAction, addProductAction, deleteProductAction,editProductAction} from '../store/actions/product.action'
 
 const useProduct = () => {
@@ -10,7 +10,7 @@ const useProduct = () => {
         apiName,
         alertType,
         emailStatus,
-    } = useSelector((state) => state.auth);
+    } = useSelector((state) => state.product);
 
 
     const dispatch = useDispatch();

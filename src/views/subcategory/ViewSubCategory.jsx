@@ -56,8 +56,8 @@ const ViewSubCategory = () => {
                                         <td>{index + 1}</td>
                                         <td>{sub.name}</td>
                                         <td>{sub.category?.name || '—'}</td>
+                                        <td>{<FaEdit onClick={() => { setSelectSubcategory(sub), setTimeout(() => setShowEditModal(true), 0) }} />}</td>
                                         <td>{<MdDelete onClick={() => handleDelete(sub.id)} />}</td>
-                                        <td>{<FaEdit onClick={() => { setSelectSubcategory(sub), setShowEditModal(true) }} />}</td>
 
                                     </tr>
                                 ))
@@ -70,7 +70,7 @@ const ViewSubCategory = () => {
                     </Table>
                 </div>
             </div>
-            
+
             <DynamicModal show={showModal} onHide={() => { closeAlert(), setShowModal(false) }} title={'Add Subcategory'}>
                 <AddSubcategory onSuccess={() => {
                     setShowModal(false)
@@ -78,7 +78,7 @@ const ViewSubCategory = () => {
                 }} />
             </DynamicModal>
 
-            <DynamicModal show={showEditModal} onHide={() => { closeAlert(); setShowEditModal(false); setSelectCategory(null) }} title="Edit Subcategory">
+            <DynamicModal show={showEditModal} onHide={() => { closeAlert(); setShowEditModal(false); setSelectSubcategory(null) }} title="Edit Subcategory">
                 <EditSubcategory
                     subcategory={selectSubcategory}
                     onSuccess={() => {

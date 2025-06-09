@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
-import { Button, Form } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Button, Table, Form } from 'react-bootstrap'
 import useSubcategory from '../../hooks/useSubcategory'
 import useCategory from '../../hooks/useCategory'
-
+import Alert from '../../components/common/alert'
 
 const EditSubcategory = ({ onSuccess, subcategory }) => {
     const { loading, alertType, message, closeAlert, editSubcategory } = useSubcategory();
@@ -35,7 +35,10 @@ const EditSubcategory = ({ onSuccess, subcategory }) => {
             name,
             category_id: categoryId,
         });
-        if (onSuccess) onSuccess();
+        setTimeout(() => {
+            if (onSuccess) onSuccess();
+            closeAlert()
+        }, 1000);
     };
 
     return (

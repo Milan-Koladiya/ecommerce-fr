@@ -21,6 +21,7 @@ const ViewProduct = () => {
 
     const handleFetchProduct = async () => {
         const res = await viewProduct();
+        console.log(res.payload)
         if (res.payload) {
             setProduct(res.payload);
         }
@@ -52,8 +53,8 @@ const ViewProduct = () => {
                                 <th>Description</th>
                                 <th>Price</th>
                                 <th>Stock</th>
-                                <th>SubCategory</th>
                                 <th>Category</th>
+                                <th>SubCategory</th>
                                 <th>Image</th>
                                 <th colSpan={2}>Action</th>
 
@@ -68,7 +69,7 @@ const ViewProduct = () => {
                                         <td>{pro.description}</td>
                                         <td>{pro.price}</td>
                                         <td>{pro.quantity}</td>
-                                        <td>{pro.subcategory?.category.name || '-'}</td>
+                                        <td>{pro.subcategory?.category?.name || '-'}</td>
                                         <td>{pro.subcategory?.name || '-'}</td>
                                         <td>  {pro.image_url ? (
                                             <img src={pro.image_url} alt={pro.name} style={{ width: '80px', height: '80px', objectFit: 'cover' }}
@@ -77,8 +78,8 @@ const ViewProduct = () => {
                                             'No image'
                                         )}
                                         </td>
-                                        <td>{<MdDelete onClick={() => handleDelete(pro.id)} />}</td>
                                         <td>{<FaEdit onClick={() => { setSelectProduct(pro); setShowEditModal(true); }} />}</td>
+                                        <td>{<MdDelete onClick={() => handleDelete(pro.id)} />}</td>
 
                                     </tr>
                                 ))

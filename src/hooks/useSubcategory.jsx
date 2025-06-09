@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMessage, errorMessage } from '../store/reducers/auth.reducers'
+import { clearMessage, errorMessage } from '../store/reducers/subcategory.reducers'
 import { fetchSubcategoryAction, addSubcategoryAction, deleteSubcategoryAction,editSubcategoryAction } from '../store/actions/subcategory.action'
+import { useCallback } from 'react';
 
 const useSubcategory = () => {
     const {
@@ -10,15 +11,15 @@ const useSubcategory = () => {
         apiName,
         alertType,
         emailStatus,
-    } = useSelector((state) => state.auth);
+    } = useSelector((state) => state.subcategory);
 
 
     const dispatch = useDispatch();
 
-    const viewSubcategory = async () => {
+    const viewSubcategory = useCallback(async () => {
         return await dispatch(fetchSubcategoryAction())
-
-    }
+    },[])
+    
     const deleteSubcategory = async (id) => {
         return await dispatch(deleteSubcategoryAction(id))
     }

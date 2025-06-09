@@ -30,7 +30,7 @@ const productSlice = createSlice({
         })
         builder.addCase(fetchProductAction.fulfilled, (state, action) => {
             state.loading = false;
-            state.categories = action.payload;
+            state.product = action.payload;
         })
         builder.addCase(fetchProductAction.rejected, (state, action) => {
             state.loading = false;
@@ -46,6 +46,7 @@ const productSlice = createSlice({
         builder.addCase(addProductAction.fulfilled, (state, action) => {
             state.loading = false;
             state.message = action.payload.message
+            state.alertType="success"
         })
         builder.addCase(addProductAction.rejected, (state, action) => {
             state.loading = false;

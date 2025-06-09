@@ -1,51 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import useCategory from '../../hooks/useCategory';
 import { Button, Form } from 'react-bootstrap';
 import Alert from '../../components/common/alert';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { categorySchema } from '../../schema/category.schama';
 
 const EditCategory = ({ onSuccess, category }) => {
-    const { loading, alertType, message, closeAlert, EditCategory } = useCategory();
+  const { loading, alertType, message, closeAlert, EditCategory } = useCategory();
 
-    const [name, setName] = useState('');
-    const [id, setId] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(categorySchema),
+    defaultValues: {
+      name: '',
+    },
+  });
 
-    useEffect(() => {
-        if (category) {
-            setName(category.name);
-            setId(category.id);
-        }
-    }, [category]);
+  useEffect(() => {
+    if (category) {
+      setValue('name', category.name);
+    }
+  }, [category, setValue]);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const res = await EditCategory(id, { name });
-        if (onSuccess) onSuccess();
+const onSubmit = async (data) => {
+  const res = await EditCategory(category.id, { name: data.name });
 
-    };
+  if (res?.payload?.success) {
+    setTimeout(() => {
+        closeAlert();
+      if (onSuccess) onSuccess();
+    }, 1000); 
+  }
+};
 
-    return (
-        <Form onSubmit={onSubmit}>
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+      {alertType && message && (
+        <Alert type={alertType} message={message} showButton={true} closeAlert={closeAlert} />
+      )}
 
-            <Form.Group controlId="categoryName">
-                {/* {alertType && message && (
-                                            <Alert type={alertType} message={message} showButton={true} closeAlert={closeAlert} />   
-                )} */}
-                <Form.Label>Category Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter category name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </Form.Group>
-            <div className="text-end mt-3">
-                <Button type="submit" variant="primary" disabled={loading}>
-                    {loading ? 'Editing...' : 'Edit Category'}
-                </Button>
-            </div>
-        </Form>
-    );
+      <Form.Group controlId="categoryName">
+        <Form.Label>Category Name</Form.Label>
+        <Form.Control type="text" placeholder="Enter category name" {...register('name')} isInvalid={!!errors.name} />
+        <Form.Control.Feedback type="invalid">{errors.name?.message}</Form.Control.Feedback>
+      </Form.Group>
+
+      <div className="text-end mt-3">
+        <Button type="submit" variant="primary" disabled={loading}>
+          {loading ? 'Editing...' : 'Edit Category'}
+        </Button>
+      </div>
+    </Form>
+  );
 };
 
 export default EditCategory;

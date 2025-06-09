@@ -47,6 +47,7 @@ const subcategorySlice = createSlice({
         builder.addCase(addSubcategoryAction.fulfilled, (state, action) => {
             state.loading = false;
             state.message = action.payload.message
+            state.alertType="success"
         })
         builder.addCase(addSubcategoryAction.rejected, (state, action) => {
             state.loading = false;

@@ -23,7 +23,6 @@ const EditProduct = ({ onSuccess, product }) => {
         subcategory_id: '',
     });
 
-    // Step 1: Load categories and subcategories once
     useEffect(() => {
         const fetchData = async () => {
             const catRes = await viewCategory();
@@ -34,7 +33,6 @@ const EditProduct = ({ onSuccess, product }) => {
         fetchData();
     }, []);
 
-    // Step 2: After categories, subcategories, and product are ready, set input
     useEffect(() => {
         if (
             product &&
@@ -48,7 +46,6 @@ const EditProduct = ({ onSuccess, product }) => {
                 description: product.description || '',
                 price: product.price || '',
                 quantity: product.quantity || '',
-                // Use product.subcategory and product.subcategory.category if available
                 category_id: product.subcategory?.category?.id
                     ? product.subcategory.category.id.toString()
                     : product.category_id?.toString() || '',
@@ -84,7 +81,10 @@ const EditProduct = ({ onSuccess, product }) => {
         }
         const id = product.id;
         const res = await editProduct(id, formData);
-        if (onSuccess) onSuccess();
+        setTimeout(() => {
+            if (onSuccess) onSuccess();
+            closeAlert()
+        }, 1000);
     };
 
     return (
@@ -96,60 +96,30 @@ const EditProduct = ({ onSuccess, product }) => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="productName">
                     <Form.Label>Product Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="name"
-                        placeholder="Enter product name"
-                        value={input.name}
-                        onChange={handleChange}
-                        required
+                    <Form.Control type="text" name="name" placeholder="Enter product name" value={input.name} onChange={handleChange} required
                     />
                 </Form.Group>
 
                 <Form.Group controlId="productDescription" className="mt-3">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        name="description"
-                        placeholder="Enter description"
-                        value={input.description}
-                        onChange={handleChange}
+                    <Form.Control as="textarea" rows={3} name="description" placeholder="Enter description" value={input.description} onChange={handleChange}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="productPrice" className="mt-3">
                     <Form.Label>Price</Form.Label>
-                    <Form.Control
-                        type="number"
-                        name="price"
-                        placeholder="Enter price"
-                        value={input.price}
-                        onChange={handleChange}
-                        required
+                    <Form.Control type="number" name="price" placeholder="Enter price" value={input.price} onChange={handleChange} required
                     />
                 </Form.Group>
 
                 <Form.Group controlId="productQuantity" className="mt-3">
                     <Form.Label>Quantity</Form.Label>
-                    <Form.Control
-                        type="number"
-                        name="quantity"
-                        placeholder="Enter quantity"
-                        value={input.quantity}
-                        onChange={handleChange}
-                        required
-                    />
+                    <Form.Control type="number" name="quantity" placeholder="Enter quantity" value={input.quantity} onChange={handleChange} required/>
                 </Form.Group>
 
                 <Form.Group controlId="productImage" className="mt-3">
                     <Form.Label>Image</Form.Label>
-                    <Form.Control
-                        type="file"
-                        name="file"
-                        onChange={handleChange}
-                        accept="image/*"
-                    />
+                    <Form.Control type="file" name="file" onChange={handleChange} accept="image/*"/>
                     {product?.image && (
                         <div className="mt-2">
                             <img
@@ -164,12 +134,7 @@ const EditProduct = ({ onSuccess, product }) => {
 
                 <Form.Group controlId="productCategory" className="mt-3">
                     <Form.Label>Category</Form.Label>
-                    <Form.Select
-                        name="category_id"
-                        value={input.category_id}
-                        onChange={handleChange}
-                        required
-                    >
+                    <Form.Select name="category_id" value={input.category_id} onChange={handleChange} required>
                         <option value="">Select Category</option>
                         {categories.map((cat) => (
                             <option key={cat.id} value={cat.id.toString()}>

@@ -1,44 +1,47 @@
-import React, { useState } from 'react';
-import { Form,Button} from 'react-bootstrap';
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { categorySchema } from '../../schema/category.schama';
 import useCategory from '../../hooks/useCategory';
-import { useNavigate } from 'react-router-dom';
-import Alert from '../../components/common/alert'
+import Alert from '../../components/common/alert';
 
 const AddCategory = ({ onSuccess }) => {
-    const { loading, apiName, alertType, message, closeAlert, addCategory} = useCategory();
-    const [name, setName] = useState('');
-    const navigate = useNavigate();
+    const { loading, apiName, alertType, message, closeAlert, addCategory } = useCategory();
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const res = await addCategory(name);
-        
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
+        resolver: yupResolver(categorySchema),
+    });
+
+    const onSubmit = async (data) => {
+        const res = await addCategory(data.name);
         if (res?.payload?.success) {
-            console.log("Category added successfully, closing modal...");
-            if (onSuccess) onSuccess();
-        } else {
-            console.log("Add category failed:", res);
+            setTimeout(() => {
+                if (onSuccess) onSuccess();
+                closeAlert();
+                reset();
+            },1000);
         }
-
-
     };
 
     return (
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)} noValidate>
             {alertType && message && (
-                <Alert type={alertType} message={message} showButton={true} closeAlert={closeAlert}
-                />
+                <Alert type={alertType} message={message} showButton={true} closeAlert={closeAlert} />
             )}
+
             <Form.Group controlId="categoryName">
                 <Form.Label>Category Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter category name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
+                <Form.Control type="text" placeholder="Enter category name" {...register('name')} isInvalid={!!errors.name}
                 />
+                <Form.Control.Feedback type="invalid">{errors.name?.message}</Form.Control.Feedback>
             </Form.Group>
+
             <div className="text-end mt-3">
                 <Button type="submit" variant="primary" disabled={loading}>
                     {loading ? 'Adding...' : 'Add Category'}

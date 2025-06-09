@@ -1,13 +1,52 @@
-import React from 'react'
+import React from 'react';
+import useDashboard from '../hooks/useDashboard';
+import { Card, Spinner } from 'react-bootstrap';
+import '../css/dashboard.css';
 
 const Dashboard = () => {
-  return (
-    <div style={{marginLeft:'180px',height:'400px',marginBlockStart:'50px',backgroundColor:'#f8f9fa'}}>
-      <h1>Dashboard</h1>
-      {/* <div style={{borderRadius:'10px', margin:'100px',width:'100px',padding:'30px',marginBottom:'100px',backgroundColor:'white'}} ><p>Product</p></div> */}
-      <div></div>
-    </div>
-  )
-}
+  const { loading, data } = useDashboard();
 
-export default Dashboard
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-10 dashboard-container">
+      <h2 className="mb-4">Dashboard</h2>
+      <div className="row">
+        <div className="col-md-4 mb-3">
+          <Card className="dashboard-card border-primary">
+            <Card.Body>
+              <Card.Title>Total Users</Card.Title>
+              <Card.Text className="fs-4 fw-bold">{data.totalUsers}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="col-md-4 mb-3">
+          <Card className="dashboard-card border-success">
+            <Card.Body>
+              <Card.Title>Total Categories</Card.Title>
+              <Card.Text className="fs-4 fw-bold">{data.totalCategories}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="col-md-4 mb-3">
+          <Card className="dashboard-card border-warning">
+            <Card.Body>
+              <Card.Title>Total Subcategories</Card.Title>
+              <Card.Text className="fs-4 fw-bold">{data.totalSubcategories}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

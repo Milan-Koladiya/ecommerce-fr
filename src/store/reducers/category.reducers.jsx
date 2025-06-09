@@ -30,10 +30,15 @@ const categorySlice = createSlice({
         builder.addCase(fetchCategoryAction.fulfilled, (state, action) => {
             state.loading = false;
             state.categories = action.payload;
+            state.message = action.payload.message;
+            state.alertType='success'
+            state.success=true
         })
         builder.addCase(fetchCategoryAction.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
+            state.alertType='danger'
+
         });
 
 
@@ -46,6 +51,7 @@ const categorySlice = createSlice({
         builder.addCase(addCategoryAction.fulfilled, (state, action) => {
             state.loading = false;
             state.message = action.payload.message
+            state.alertType = "success"
 
         })
         builder.addCase(addCategoryAction.rejected, (state, action) => {
