@@ -10,7 +10,7 @@ export interface IUser {
 }
 
 
-export interface resetPasswordType{
+export interface IResetPasswordType{
   token:object|string|null,
   newPassword:string
 }

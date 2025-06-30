@@ -9,7 +9,7 @@ import {
     resetPasswordAction
 } from '../store/actions/auth.action'
 import { clearMessage } from '../store/reducers/auth.reducers'
-import type { IUser,resetPasswordType } from "../types/userType"
+import type { IUser,IResetPasswordType } from "../types/user.type"
 
 const useAuth = () => {
 
@@ -40,7 +40,7 @@ const useAuth = () => {
         return await dispatch(forgetPasswordAction(email));
     };
 
-    const resetPassword = async ({token, newPassword}:resetPasswordType) => {
+    const resetPassword = async ({token, newPassword}:IResetPasswordType) => {
         return await dispatch(resetPasswordAction({token, newPassword}));
     };
 

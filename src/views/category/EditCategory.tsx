@@ -5,14 +5,14 @@ import Alert from '../../components/common/alert';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { categorySchema } from '../../schema/category.schama';
-import type { ICategory } from '../../types/categoryType';
+import type { ICategory } from '../../types/category.type';
 
-interface EditCategoryProps {
+type IEditCategoryProps={
   category: ICategory ;
   onSuccess: () => void;
 }
 
-const EditCategory: React.FC<EditCategoryProps> = ({ onSuccess, category }) => {
+const EditCategory: React.FC<IEditCategoryProps> = ({ onSuccess, category }) => {
   const { loading, alertType, message,apiName, closeAlert, EditCategory } = useCategory();
 
   const {

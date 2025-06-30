@@ -7,13 +7,13 @@ export interface DashboardDataType {
   totalSubcategories: number;
 }
 
-interface initialStateType{
+interface InitialStateType{
   loading:boolean,
   data:DashboardDataType|null,
   error:null|string|unknown
 }
 
-const initialState:initialStateType={
+const initialState:InitialStateType={
     loading: false,
     data:null ,
     error: null,

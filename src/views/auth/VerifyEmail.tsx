@@ -1,11 +1,11 @@
 import type React from 'react'
 import {Link} from 'react-router-dom'
 
-interface VerifyEmailMessage{
+type IVerifyEmailMessage={
   message:string
 }
 
-const VerifyEmail:React.FC<VerifyEmailMessage> = ({message}) => {
+const VerifyEmail:React.FC<IVerifyEmailMessage> = ({message}) => {
   return (
     <div>
       <div className="d-flex m-10 justify-content-center vh-10 bg-light">

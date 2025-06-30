@@ -6,7 +6,7 @@ import Alert from '../../components/common/alert';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { subcategorySchema } from '../../schema/subcategory.schema';
-import type { ICategory } from '../../types/categoryType';
+import type { ICategory } from '../../types/category.type';
 
 const AddSubcategory = ({ onSuccess }:any) => {
   const { loading, alertType, message, closeAlert, addSubcategory } = useSubcategory();

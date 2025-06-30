@@ -1,14 +1,14 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 
-interface DynamicModalProps{
+type IDynamicModalProps={
     show?:boolean,
     onHide?:()=>void,
     title?:string,
     children?:React.ReactNode
 }
 
-const DynamicModal:React.FC<DynamicModalProps>= ({ show, onHide, title, children }) => {
+const DynamicModal:React.FC<IDynamicModalProps>= ({ show, onHide, title, children }) => {
     return (
         <>
             <Modal show={show} onHide={onHide} backdrop="static">

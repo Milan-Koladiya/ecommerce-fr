@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import localStorage from '../../utils/localStorage'
 import type { APIsuccessResponse } from '../../libs/axios';
-import type { ISubcategory, EditSubcategory } from "../../types/subcategoryType"
+import type { ISubcategory,EditSubcategoryArgs } from "../../types/subcategory.type"
 
 export const fetchSubcategoryAction = createAsyncThunk<APIsuccessResponse>(
   "subcategory/fetchAll",
@@ -66,7 +66,7 @@ export const deleteSubcategoryAction = createAsyncThunk<APIsuccessResponse, ISub
   }
 );
 
-export const editSubcategoryAction = createAsyncThunk<APIsuccessResponse, EditSubcategory>(
+export const editSubcategoryAction = createAsyncThunk<APIsuccessResponse, EditSubcategoryArgs>(
   "subcategory/edit",
   async ({ id, body }, thinkAPI) => {
     try {

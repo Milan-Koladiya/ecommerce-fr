@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerAction, verifyEmailAction, loginAction, forgetPasswordAction, resetPasswordAction, logoutAction } from "../actions/auth.action";
-import type { initialStateType } from "../../types/stateType"
+import type { InitialStateType } from "../../types/state.type"
 
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
   loading: "",
   message: "",
   error: false,

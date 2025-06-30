@@ -1,7 +1,7 @@
 import type React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-interface ConfirmBoxProps{
+type IConfirmBoxProps={
   show?:boolean,
   onClose?:()=>void,
   onConfirm?:()=>void,
@@ -9,7 +9,7 @@ interface ConfirmBoxProps{
   message:string
 }
 
-const ConfirmBox:React.FC<ConfirmBoxProps> = ({ show, onClose, onConfirm, title, message }) => {
+const ConfirmBox:React.FC<IConfirmBoxProps> = ({ show, onClose, onConfirm, title, message }) => {
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>

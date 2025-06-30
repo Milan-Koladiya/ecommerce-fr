@@ -1,4 +1,4 @@
-import type { ICategory } from "./categoryType"
+import type { ICategory } from "./category.type"
 
 export interface ISubcategory{
     id:string,
@@ -8,7 +8,7 @@ export interface ISubcategory{
     category?:ICategory
 }
 
-export interface EditSubcategory{
+export interface EditSubcategoryArgs{
     id?:string,
     body?:ISubcategory
 }

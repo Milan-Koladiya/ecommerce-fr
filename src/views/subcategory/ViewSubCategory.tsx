@@ -6,7 +6,7 @@ import useSubcategory from '../../hooks/useSubcategory'
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import EditSubcategory from './EditSubcategory'
-import type { ISubcategory } from '../../types/subcategoryType'
+import type { ISubcategory } from '../../types/subcategory.type'
 
 const ViewSubCategory = () => {
     const [showModal, setShowModal] = useState(false);

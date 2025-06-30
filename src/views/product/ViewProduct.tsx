@@ -6,7 +6,7 @@ import useProduct from '../../hooks/useProduct'
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import EditProduct from './EditProduct'
-import type { IProduct } from '../../types/productType'
+import type { IProduct } from '../../types/product.type'
 
 const ViewProduct = () => {
     const [showModal, setShowModal] = useState(false);

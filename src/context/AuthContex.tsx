@@ -2,22 +2,16 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import Loader from "../components/common/loader";
 import API from "../libs/axios";
 import localStorage from "../utils/localStorage";
-import type {IUser} from "../types/userType"
+import type {IUser} from "../types/user.type"
 
-type AuthProviderProps = {
+type IAuthProviderProps = {
   children: React.ReactNode
 }
-
-// type AuthContexType = {
-//   authUser: IUser |null,
-//   setAuthUser: React.Dispatch<React.SetStateAction<IUser | null>>,
-//   loading: boolean
-// }
 
 const AuthContext = createContext<any>(null);
 
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const [authUser, setAuthUser] = useState<IUser|null>(localStorage.getItem("user"));
   const [loading, setLoading] = useState(true);
 

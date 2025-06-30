@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchProductAction, addProductAction, editProductAction, deleteProductAction } from "../actions/product.action";
 
-interface initialStateType {
+interface InitialStateType {
   loading?: boolean,
   error?: null|unknown
   alertType?: string,
@@ -12,7 +12,7 @@ interface initialStateType {
   success?:string
 }
 
-const initialState:initialStateType={
+const initialState:InitialStateType={
         product:{},
         loading: false,
         error: null,

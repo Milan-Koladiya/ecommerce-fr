@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import localStorage from '../../utils/localStorage'
-import type { IUser,resetPasswordType } from '../../types/userType'
+import type { IUser,IResetPasswordType } from '../../types/user.type'
 import type { APIsuccessResponse } from '../../libs/axios';
 
 export const registerAction = createAsyncThunk<APIsuccessResponse, IUser>(
@@ -78,7 +78,7 @@ export const forgetPasswordAction = createAsyncThunk<APIsuccessResponse,IUser>(
   }
 );
 
-export const resetPasswordAction = createAsyncThunk<APIsuccessResponse,resetPasswordType>(
+export const resetPasswordAction = createAsyncThunk<APIsuccessResponse,IResetPasswordType>(
   'auth/resetPassword',
   async ({ token, newPassword }, thunkAPI) => {
     try {

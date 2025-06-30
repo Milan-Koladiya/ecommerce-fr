@@ -3,7 +3,7 @@ import { clearMessage } from '../store/reducers/subcategory.reducers'
 import { fetchSubcategoryAction, addSubcategoryAction, deleteSubcategoryAction,editSubcategoryAction } from '../store/actions/subcategory.action'
 import { useCallback } from 'react';
 import type { AppDispatch, RootState } from "../store/index"
-import type { EditSubcategory, ISubcategory } from '../types/subcategoryType';
+import type { EditSubcategoryArgs, ISubcategory } from '../types/subcategory.type';
 
 const useSubcategory = () => {
     const {
@@ -34,7 +34,7 @@ const useSubcategory = () => {
         dispatch(clearMessage());
     };
 
-    const editSubcategory = async ({id,body}:EditSubcategory) => {
+    const editSubcategory = async ({id,body}:EditSubcategoryArgs) => {
         return await dispatch(editSubcategoryAction({id,body:body}))
     }
 

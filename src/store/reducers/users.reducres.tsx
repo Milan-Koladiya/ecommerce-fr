@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProfileAction } from '../actions/user.action';
-import type {initialStateType} from '../../types/stateType'
+import type {InitialStateType} from '../../types/state.type'
 
-const initialState:initialStateType={
+const initialState:InitialStateType={
         loading: false,
         error: null,
         profile:{}

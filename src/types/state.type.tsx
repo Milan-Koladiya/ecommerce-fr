@@ -1,7 +1,7 @@
-import type { IUser } from "./userType";
+import type { IUser } from "./user.type";
 
 
-export interface initialStateType{
+export interface InitialStateType{
     loading?: string|boolean;
     message?: any;
     error?: boolean|null|unknown;

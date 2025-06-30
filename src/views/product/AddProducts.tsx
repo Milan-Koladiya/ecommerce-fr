@@ -7,8 +7,8 @@ import useCategory from '../../hooks/useCategory';
 import useSubcategory from '../../hooks/useSubcategory';
 import useProduct from '../../hooks/useProduct';
 import Alert from '../../components/common/alert';
-import type { ICategory } from '../../types/categoryType';
-import type { ISubcategory } from '../../types/subcategoryType';
+import type { ICategory } from '../../types/category.type';
+import type { ISubcategory } from '../../types/subcategory.type';
 
 const AddProductView = ({ onSuccess }:any) => {
   const { addProduct, loading, alertType, message, closeAlert } = useProduct();

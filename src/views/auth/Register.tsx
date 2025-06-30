@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuthentication';
 import { useNavigate, Link } from 'react-router-dom';
 import Alert from '../../components/common/alert';
 
-type RegisterFormValues = {
+type IRegisterFormValues = {
   first_name: string;
   last_name: string;
   email: string;
@@ -22,7 +22,7 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormValues>({
+  } = useForm<IRegisterFormValues>({
     resolver: yupResolver(signupSchema),
     defaultValues: {
       first_name: '',

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import localStorage from '../../utils/localStorage'
-import type { ICategory,UpdateCategoryArgs } from '../../types/categoryType';
+import type { ICategory,UpdateCategoryArgs } from '../../types/category.type';
 import type { APIsuccessResponse } from '../../libs/axios';
 
 export const fetchCategoryAction = createAsyncThunk<APIsuccessResponse>(

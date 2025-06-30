@@ -4,7 +4,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Spinner } from 'react-bootstrap';
 import useOrder from '../../hooks/useOrder';
 import Alert from '../../components/common/alert';
-import type { IUserWithOrders } from '../../types/orderType';
+import type { IUserWithOrders } from '../../types/order.type';
+
 const ViewOrder = () => {
   const [users, setUsers] = useState<IUserWithOrders[]>([]);
 

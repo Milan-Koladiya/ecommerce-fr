@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchOrderyAction } from "../actions/order.action";
 
-interface initialStateType {
+interface InitialStateType {
   loading: boolean,
   error: null|unknown,
   alertType: string,
@@ -10,7 +10,7 @@ interface initialStateType {
   order: object,
 }
 
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
   loading: false,
   error: null,
   alertType: "",

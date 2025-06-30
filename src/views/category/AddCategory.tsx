@@ -6,11 +6,11 @@ import { categorySchema } from '../../schema/category.schama';
 import useCategory from '../../hooks/useCategory';
 import Alert from '../../components/common/alert';
 
-interface AddCategoryProps {
+type IAddCategoryProps= {
     onSuccess: () => void;
 }
 
-const AddCategory: React.FC<AddCategoryProps> = ({ onSuccess }) => {
+const AddCategory: React.FC<IAddCategoryProps> = ({ onSuccess }) => {
     const { loading,apiName, alertType, message, closeAlert, addCategory } = useCategory();
 
     const {

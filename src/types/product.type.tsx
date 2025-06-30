@@ -1,5 +1,5 @@
-import type { ICategory } from "./categoryType"
-import type { ISubcategory } from "./subcategoryType"
+import type { ICategory } from "./category.type"
+import type { ISubcategory } from "./subcategory.type"
 
 export interface IProduct{
     id:string;
@@ -15,7 +15,7 @@ export interface IProduct{
     category?:ICategory
 }
 
-export interface EditProduct{
+export interface EditProductArgs {
     id?:string;
     formData:FormData;
 }

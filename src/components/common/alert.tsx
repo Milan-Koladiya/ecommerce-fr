@@ -1,13 +1,13 @@
 import React from 'react';
 
-type AlertProps = {
+type IAlertProps = {
   type?: string,
   message?: string|React.ReactNode,
   showButton?: boolean,
   closeAlert?: () => void
 
 }
-const Alert: React.FC<AlertProps> = ({ type = 'info', message, showButton = true, closeAlert }) => {
+const Alert: React.FC<IAlertProps> = ({ type = 'info', message, showButton = true, closeAlert }) => {
   return (
     <div style={{ margin: '20px', marginBottom: '2px' }} className={`alert alert-${type} alert-dismissible fade show`} role="alert">
       {message}

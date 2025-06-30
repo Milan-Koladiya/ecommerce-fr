@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import localStorage from '../../utils/localStorage'
 import type { APIsuccessResponse } from '../../libs/axios';
-import type { IProduct,EditProduct } from '../../types/productType';
+import type { IProduct,EditProductArgs } from '../../types/product.type';
 
 export const fetchProductAction = createAsyncThunk<APIsuccessResponse>(
     "product/fetchAll",
@@ -69,7 +69,7 @@ export const deleteProductAction = createAsyncThunk<APIsuccessResponse,IProduct>
 
 
 
-export const editProductAction = createAsyncThunk<APIsuccessResponse,EditProduct>(
+export const editProductAction = createAsyncThunk<APIsuccessResponse,EditProductArgs>(
     "product/edit",
     async ({id,formData},thinkAPI) => {
         try {

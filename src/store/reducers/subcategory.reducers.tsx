@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchSubcategoryAction, addSubcategoryAction, editSubcategoryAction, deleteSubcategoryAction } from "../actions/subcategory.action";
 import React from "react"
 
-interface initialStateType {
+interface InitialStateType {
     loading?: boolean,
     error?: null | unknown
     alertType?: string,
@@ -12,7 +12,7 @@ interface initialStateType {
     success?: string
 }
 
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
     loading: false,
     error: null,
 }

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage } from '../store/reducers/product.reducer'
 import { fetchProductAction, addProductAction, deleteProductAction,editProductAction} from '../store/actions/product.action'
 import type { AppDispatch, RootState } from "../store/index"
-import type { EditProduct, IProduct } from '../types/productType'
+import type { EditProductArgs, IProduct } from '../types/product.type'
 
 const useProduct = () => {
     const {
@@ -29,7 +29,7 @@ const useProduct = () => {
         return await dispatch(deleteProductAction(id))
     }
 
-    const editProduct=async({id,formData}:EditProduct)=>{
+    const editProduct=async({id,formData}:EditProductArgs)=>{
         return await dispatch(editProductAction({id,formData}))
     }
 

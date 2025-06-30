@@ -7,7 +7,7 @@ import { MdDelete } from 'react-icons/md';
 import useCategory from '../../hooks/useCategory';
 import EditCategory from './EditCategory'
 import ConfirmBox from '../../components/confirmBox'
-import type { ICategory } from '../../types/categoryType';
+import type { ICategory } from '../../types/category.type';
 
 const ViewCategory = () => {
   const [showModal, setShowModal] = useState(false);

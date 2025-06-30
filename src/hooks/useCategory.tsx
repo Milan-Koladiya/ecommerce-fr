@@ -3,7 +3,7 @@ import { clearMessage } from '../store/reducers/category.reducers'
 import { fetchCategoryAction, addCategoryAction,deleteCategoryAction,editCategoryAction} from '../store/actions/category.action'
 import { useCallback } from 'react';
 import type { AppDispatch, RootState } from "../store/index"
-import type { ICategory,UpdateCategoryArgs } from '../types/categoryType';
+import type { ICategory,UpdateCategoryArgs } from '../types/category.type';
 
 const useCategory = () => {
     const {

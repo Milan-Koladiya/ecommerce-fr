@@ -4,16 +4,16 @@ import useCategory from '../../hooks/useCategory';
 import useSubcategory from '../../hooks/useSubcategory';
 import useProduct from '../../hooks/useProduct';
 import Alert from '../../components/common/alert';
-import type { ICategory } from '../../types/categoryType';
-import type { ISubcategory } from '../../types/subcategoryType';
-import type { IProduct } from '../../types/productType';
+import type { ICategory } from '../../types/category.type';
+import type { ISubcategory } from '../../types/subcategory.type';
+import type { IProduct } from '../../types/product.type';
 
-interface EditProductProps {
+type IEditProductProps={
     product: IProduct|null;
     onSuccess: () => void;
 }
 
-const EditProduct: React.FC<EditProductProps> = ({ onSuccess, product }) => {
+const EditProduct: React.FC<IEditProductProps> = ({ onSuccess, product }) => {
     const { editProduct, loading, alertType, message, closeAlert } = useProduct();
     const { viewCategory } = useCategory();
     const { viewSubcategory } = useSubcategory();

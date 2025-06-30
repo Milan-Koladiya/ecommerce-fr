@@ -3,16 +3,16 @@ import { Button, Form } from 'react-bootstrap'
 import useSubcategory from '../../hooks/useSubcategory'
 import useCategory from '../../hooks/useCategory'
 import Alert from '../../components/common/alert'
-import type { ICategory } from '../../types/categoryType'
-import type { ISubcategory } from '../../types/subcategoryType'
+import type { ICategory } from '../../types/category.type'
+import type { ISubcategory } from '../../types/subcategory.type'
 
-interface EditSubcategoryProps {
+type IEditSubcategoryProps={
   onSuccess: () => void;
   subcategory: ISubcategory|null;
 }
 
 
-const EditSubcategory:React.FC<EditSubcategoryProps> = ({ onSuccess, subcategory }:any) => {
+const EditSubcategory:React.FC<IEditSubcategoryProps> = ({ onSuccess, subcategory }:any) => {
     const { loading, alertType, message, closeAlert, editSubcategory } = useSubcategory();
     const { viewCategory } = useCategory();
 
